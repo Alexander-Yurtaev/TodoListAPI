@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using TodoListAPI.Mvc.Data;
+using TodoListAPI.Mvc.Data.Identity;
+using TodoListAPI.Mvc.Data.TodoList;
 
 namespace TodoListAPI.Mvc;
 
@@ -12,13 +12,13 @@ public class Program
         builder.AddServiceDefaults();
 
         // Add services to the container.
-        var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
-        builder.Services.AddDbContext<ApplicationDbContext>(options =>
-            options.UseSqlServer(connectionString));
+        builder.AddNpgsqlDbContext<IdentityDbContext>("identity-db");
+        builder.AddNpgsqlDbContext<TodoListDbContext>("todo-list-db");
+
         builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
         builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-            .AddEntityFrameworkStores<ApplicationDbContext>();
+            .AddEntityFrameworkStores<IdentityDbContext>();
         builder.Services.AddControllersWithViews();
 
         var app = builder.Build();

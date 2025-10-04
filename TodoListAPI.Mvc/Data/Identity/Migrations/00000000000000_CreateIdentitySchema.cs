@@ -1,8 +1,7 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Metadata;
+﻿using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace TodoListAPI.Mvc.Data.Migrations
+namespace TodoListAPI.Mvc.Data.Identity.Migrations
 {
     public partial class CreateIdentitySchema : Migration
     {
