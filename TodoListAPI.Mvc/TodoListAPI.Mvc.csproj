@@ -5,7 +5,13 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>aspnet-TodoListAPI.Mvc-5ccc936c-a02f-4677-9120-7b7c0482ffef</UserSecretsId>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <DocumentationFile>MyApi.xml</DocumentationFile>
   </PropertyGroup>
+
+  <ItemGroup>	        
+	<PackageReference Include="Swashbuckle.AspNetCore" />
+  </ItemGroup>
 
   <ItemGroup Label="Aspire">
     <PackageReference Include="Aspire.Npgsql.EntityFrameworkCore.PostgreSQL" />

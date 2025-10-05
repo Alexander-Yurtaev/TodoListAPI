@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Identity;
 using TodoListAPI.Mvc.Data.Identity;
 using TodoListAPI.Mvc.Data.TodoList;
+using TodoListAPI.Mvc.Repositories;
+using Microsoft.OpenApi.Models;
 
 namespace TodoListAPI.Mvc;
 
@@ -19,6 +21,18 @@ public class Program
 
         builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
             .AddEntityFrameworkStores<IdentityDbContext>();
+
+        builder.Services.AddScoped<ITodoRepository, TodoRepository>();
+
+        builder.Services.AddEndpointsApiExplorer();
+        builder.Services.AddSwaggerGen(c =>
+        {
+            c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
+
+            var filePath = Path.Combine(AppContext.BaseDirectory, "MyApi.xml");
+            c.IncludeXmlComments(filePath);
+        });
+
         builder.Services.AddControllersWithViews();
 
         var app = builder.Build();
@@ -28,7 +42,8 @@ public class Program
         // Configure the HTTP request pipeline.
         if (app.Environment.IsDevelopment())
         {
-            app.UseMigrationsEndPoint();
+            app.UseSwagger();
+            app.UseSwaggerUI();
         }
         else
         {

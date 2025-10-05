@@ -3,6 +3,9 @@
     <!-- Enable central package management, https://learn.microsoft.com/en-us/nuget/consume-packages/Central-Package-Management -->
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
   </PropertyGroup>
+  <ItemGroup Label="Common">
+    <PackageVersion Include="Swashbuckle.AspNetCore" Version="9.0.5" />
+  </ItemGroup>
   <ItemGroup Label="Microsoft.Extensions">
     <PackageVersion Include="Aspire.Hosting.PostgreSQL" Version="9.5.0" />
     <PackageVersion Include="Aspire.Npgsql" Version="9.5.0" />
